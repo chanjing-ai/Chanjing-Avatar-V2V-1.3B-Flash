@@ -1,0 +1,78 @@
+[project]
+name = "chanjing-avatar-v2v-1-3b-flash"
+version = "0.1.0"
+description = "Training and inference code for Chanjing-Avatar V2V 1.3B Flash"
+readme = "README.md"
+requires-python = "==3.13.*"
+license = { file = "LICENSE" }
+dependencies = [
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+    "nvidia-cudnn-cu12",
+    "nvidia-cublas-cu12",
+    "nvidia-curand-cu12",
+    "diffusers==0.36.0",
+    "transformers==4.57.6",
+    "einops==0.8.1",
+    "librosa==0.10.2",
+    "numpy>=1.26,<2",
+    "onnxruntime-gpu>=1.22,<1.24",
+    "opencv-python-headless>=4.11,<5",
+    "pillow>=11,<13",
+    "pyloudnorm==0.2.0",
+    "safetensors>=0.5,<1",
+    "tqdm>=4.67,<5",
+]
+
+[project.scripts]
+chanjing-avatar-infer = "inference:main"
+chanjing-avatar-preprocess = "training.preprocess:main"
+chanjing-avatar-train = "training.train:main"
+
+[project.optional-dependencies]
+train = [
+    "lightning>=2.5,<3",
+    "tensorboard>=2.18,<3",
+]
+yolo = [
+    "ultralytics>=8.3,<9",
+]
+distributed = [
+    "xfuser>=0.4.5,<0.5",
+]
+test = [
+    "pytest>=8.3,<9",
+]
+build = [
+    "ninja",
+]
+
+[tool.uv]
+index-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+nvidia-cudnn-cu12 = { index = "pytorch-cu128" }
+nvidia-cublas-cu12 = { index = "pytorch-cu128" }
+nvidia-curand-cu12 = { index = "pytorch-cu128" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["."]
+
+[tool.setuptools]
+py-modules = ["inference"]
+
+[tool.setuptools.packages.find]
+include = ["chanjing_avatar*", "training*"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"

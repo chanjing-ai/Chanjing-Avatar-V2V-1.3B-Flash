@@ -1,0 +1,32 @@
+.DS_Store
+.idea/
+.vscode/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+*.egg-info/
+
+# Model assets and generated tensors must never be committed.
+models/
+weights/
+pretrain_models/
+checkpoints/
+outputs/
+*.ckpt
+*.onnx
+*.pt
+*.pth
+*.safetensors
+*.npy
+
+# Local media and credentials.
+*.mp4
+*.mov
+*.avi
+*.wav
+*.mp3
+.env
+*.pem
+*.key

@@ -1,0 +1,7 @@
+Chanjing-Avatar V2V 1.3B Flash
+Copyright 2026 Chanjing AI contributors
+
+This product includes software derived from the Wan video model codebase and
+the Hugging Face Transformers Wav2Vec2 implementation. See README.md for the
+upstream project links. Third-party packages and model assets remain subject
+to their respective licenses.

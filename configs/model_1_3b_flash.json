@@ -1,0 +1,16 @@
+{
+  "_class_name": "WanModelAudioProject",
+  "_diffusers_version": "0.36.0",
+  "dim": 1536,
+  "eps": 1e-06,
+  "ffn_dim": 8960,
+  "freq_dim": 256,
+  "has_image_input": false,
+  "in_dim": 96,
+  "num_heads": 12,
+  "num_layers": 30,
+  "out_dim": 48,
+  "patch_size": [1, 1, 1],
+  "text_dim": 4096,
+  "vae_stride": [4, 16, 16]
+}
