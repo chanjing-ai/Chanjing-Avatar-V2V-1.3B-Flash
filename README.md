@@ -1,11 +1,14 @@
 # Chanjing-Avatar V2V 1.3B Flash
 
-[简体中文](README_zh.md) | English
+[English](README.md) | [简体中文](README_zh.md)
+
+[Demo](#demo) | [Model Family](#chanjing-avatar-model-family) | [Installation](#installation) | [Inference](#inference) | [Training](#training-data)
 
 Training and inference code for **Chanjing-Avatar V2V 1.3B Flash**, a compact
 audio-driven video-to-video avatar model from [Chanjing](https://www.chanjing.cc/).
 The pipeline preserves the source video's identity and scene while driving
-facial motion from a new audio track.
+facial motion from a new audio track. It does not use text prompts and provides
+a 14-step original preset and a 6-step Audio-CFG-distilled preset.
 
 > **Code-only release:** model weights, VAE weights, audio encoder weights,
 > face detector weights, and example media are not included. Chanjing-Avatar
@@ -17,15 +20,36 @@ The model repository is available on
 but weights have not been uploaded yet.
 
 
+## Demo
+
 https://github.com/user-attachments/assets/e6cfec61-ee21-420f-a0ab-7c2d105023c6
 
 
-## Model family
+## Chanjing-Avatar Model Family
 
-- [Chanjing-Avatar](https://github.com/chanjing-ai/Chanjing-Avatar): image-to-video digital human model.
-- [Chanjing-Avatar V2V 5B](https://github.com/chanjing-ai/Chanjing-Avatar-V2V-5B): higher-capacity video-to-video model.
-- [Chanjing-Avatar V2V 1.3B](https://github.com/chanjing-ai/Chanjing-Avatar-V2V-1.3B): long-form 1.3B video-to-video model.
-- **Chanjing-Avatar V2V 1.3B Flash**: this compact codebase, with training and a three-stage inference pipeline.
+Training and inference code is open in all four repositories. Checkpoint
+availability is listed separately below.
+
+| Project | Input | Pipeline | Checkpoints |
+| --- | --- | --- | --- |
+| [Chanjing-Avatar 14B](https://github.com/chanjing-ai/Chanjing-Avatar) | Reference image + audio + prompt | 720p I2V; Wan2.1-T2V-14B | [Available](https://huggingface.co/cicada-ai/Chanjing-Avatar-14B) |
+| [Chanjing-Avatar V2V 5B](https://github.com/chanjing-ai/Chanjing-Avatar-V2V-5B) | Source video + audio | Face-region V2V; Wan2.2-TI2V-5B | [Available](https://huggingface.co/cicada-ai/Chanjing-Avatar-V2V-5B) |
+| [Chanjing-Avatar V2V 1.3B](https://github.com/chanjing-ai/Chanjing-Avatar-V2V-1.3B) | Source video + audio | Streaming V2V; Wan2.1-T2V-1.3B / InfiniteTalk | [Available](https://huggingface.co/cicada-ai/Chanjing-Avatar-V2V-1.3B) |
+| [Chanjing-Avatar V2V 1.3B Flash](https://github.com/chanjing-ai/Chanjing-Avatar-V2V-1.3B-Flash) | Source video + audio | Prompt-free V2V; 14-step original / 6-step Audio CFG preset | [Model page; weights pending](https://huggingface.co/cicada-ai/Chanjing-Avatar-V2V-1.3B-Flash) |
+
+### Choosing a Model
+
+- Starting from a still image: use **14B** to generate the talking-avatar video.
+- Starting from a video: use **V2V 5B** or **V2V 1.3B** to preserve source motion
+  while regenerating the speaking face. The 1.3B pipeline supports streaming
+  long-video generation.
+- Exploring prompt-free V2V and Audio CFG distillation: see **1.3B Flash**.
+  Its code is public, but end-to-end inference requires separately obtained
+  compatible weights.
+
+Use each repository's own environment, checkpoints, and preprocessing workflow.
+Parameter counts and sampling steps alone do not establish a speed, VRAM, or
+quality ranking across these different pipelines.
 
 ## What is included
 
@@ -34,7 +58,7 @@ inference.py                  # preprocess -> latent inference -> decode
 chanjing_avatar/              # model, VAE, audio, face, and pipeline modules
 training/preprocess.py        # multi-GPU training-data preprocessing
 training/train.py             # Lightning training and safetensors delta export
-configs/model_1_3b_flash.json # 1.3B Flash architecture (no parameters)
+configs/model_1_3b_flash.json   # 1.3B Flash architecture (no parameters)
 examples/                     # command examples only; no private filenames/media
 tests/                        # config, CLI, and dataset-contract tests
 ```
@@ -49,6 +73,9 @@ Linux, Python 3.13, CUDA 12.8, and an NVIDIA GPU are the tested baseline.
 `ffmpeg` must be installed and available on `PATH`.
 
 ```bash
+git clone https://github.com/chanjing-ai/Chanjing-Avatar-V2V-1.3B-Flash.git
+cd Chanjing-Avatar-V2V-1.3B-Flash
+
 uv sync
 ```
 
