@@ -12,6 +12,8 @@
 模型仓库已在 [Hugging Face](https://huggingface.co/cicada-ai/Chanjing-Avatar-V2V-1.3B-Flash)
 创建，权重暂未上传。
 
+https://github.com/user-attachments/assets/e6cfec61-ee21-420f-a0ab-7c2d105023c6
+
 ## 模型家族
 
 - [Chanjing-Avatar](https://github.com/chanjing-ai/Chanjing-Avatar)：图生视频数字人模型。
