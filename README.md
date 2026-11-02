@@ -16,6 +16,10 @@ The model repository is available on
 [Hugging Face](https://huggingface.co/cicada-ai/Chanjing-Avatar-V2V-1.3B-Flash),
 but weights have not been uploaded yet.
 
+
+https://github.com/user-attachments/assets/e6cfec61-ee21-420f-a0ab-7c2d105023c6
+
+
 ## Model family
 
 - [Chanjing-Avatar](https://github.com/chanjing-ai/Chanjing-Avatar): image-to-video digital human model.
